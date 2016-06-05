@@ -3,8 +3,13 @@ var Gigasecond = function(date) {
 };
 
 Gigasecond.prototype.date = function(){
-  var gigasecondAnniversary = new Date(this.initalizedDate.getTime() + 1000000000000);
+  var gigasecondAnniversary = addSeconds(this.initalizedDate, 1000000000);
   return gigasecondAnniversary;
+
+  function addSeconds(date, seconds){
+    var totalMilliseconds = seconds * 1000;
+    return new Date(date.getTime() + totalMilliseconds);
+  }
 };
 
 module.exports = Gigasecond;
