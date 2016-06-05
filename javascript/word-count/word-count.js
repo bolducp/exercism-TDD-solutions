@@ -1,15 +1,14 @@
 var Words = function(){};
 
 Words.prototype.count = function(sentence){
-  var sanitizedSentence = sentence.replace(/\s+/g,' ').trim();
-  var wordsArray = sanitizedSentence.split(" ");
+  var wordsArray = sentence.trim().split(/\s+/g);
   var wordHistogram = {};
 
   for (i in wordsArray){
     var word = wordsArray[i].toLowerCase();
 
-    if (typeof wordHistogram[word] === 'number'){
-      wordHistogram[word] = wordHistogram[word] + 1;
+    if (wordHistogram.hasOwnProperty(word)){
+      wordHistogram[word]++;
     } else {
       wordHistogram[word] = 1;
     }
