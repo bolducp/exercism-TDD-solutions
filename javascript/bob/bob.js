@@ -3,14 +3,27 @@ var Bob = function() {};
 Bob.prototype.hey = function(input) {
   input = input.trim();
 
-  if (input === input.toUpperCase() && input.match(/[a-z]/i)) {
+  if (isYelling(input)) {
     return "Whoa, chill out!";
-  } else if (input[input.length - 1] === "?") {
+  } else if (isQuestion(input)) {
      return "Sure.";
-  } else if (input.length === 0) {
+  } else if (isSilence(input)) {
     return "Fine. Be that way!";
   }
   return "Whatever.";
+
+
+  function isYelling(input){
+    return input === input.toUpperCase() && input.match(/[a-z]/i);
+  }
+
+  function isQuestion(input){
+    return input[input.length - 1] === "?";
+  }
+
+  function isSilence(input){
+    return input.length === 0;
+  }
 }
 
 module.exports = Bob;
