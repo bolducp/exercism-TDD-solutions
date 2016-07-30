@@ -1,15 +1,14 @@
-
 var PhoneNumber = function(phoneNumber) {
-	this.phoneNumber = phoneNumber;
+	this.phoneNumber = String(phoneNumber);
 };
 
 PhoneNumber.prototype.number = function() {
 	if (isValidNumber(this.phoneNumber)) {
-		var sanitizedNumber = stripPunctuation(this.phoneNumber);
+		var sanitizedNumber = stripFormatters(this.phoneNumber);
 		if (sanitizedNumber.length === 10) {
-			return String(sanitizedNumber);
+			return sanitizedNumber;
 		} else {
-			return String(sanitizedNumber).slice(1);
+			return sanitizedNumber.slice(1);
 		}
 	}
 	return "0000000000";
@@ -17,7 +16,7 @@ PhoneNumber.prototype.number = function() {
 
 PhoneNumber.prototype.areaCode = function() {
 	if (isValidNumber(this.phoneNumber)) {
-		if (stripPunctuation(this.phoneNumber).length === 11) { 
+		if (stripFormatters(this.phoneNumber).length === 11) { 
 			return this.phoneNumber.slice(1, 4);
 		} else {
 			return this.phoneNumber.slice(0, 3);
@@ -30,10 +29,10 @@ PhoneNumber.prototype.toString = function() {
 	if (isValidNumber(this.phoneNumber)) {
 		var formattedNumber = "";
 
-		if (stripPunctuation(this.phoneNumber).length === 10) { 
-			formattedNumber += ("(" + this.areaCode() + ") " + String(this.number()).slice(3, 6) + "-" + String(this.number()).slice(6, 10));
+		if (stripFormatters(this.phoneNumber).length === 10) { 
+			formattedNumber += ("(" + this.areaCode() + ") " + this.number().slice(3, 6) + "-" + this.number().slice(6, 10));
 		} else {
-			formattedNumber += ("(" + this.areaCode() + ") " + String(this.number()).slice(4, 7) + "-" + String(this.number()).slice(7, 11));
+			formattedNumber += ("(" + this.areaCode() + ") " + this.number().slice(4, 7) + "-" + this.number().slice(7, 11));
 		}
 		return formattedNumber;
 	}
@@ -41,8 +40,9 @@ PhoneNumber.prototype.toString = function() {
 }
 
 function isValidNumber(phoneNumber) { 
-	var strippedNumber = stripPunctuation(phoneNumber);
-	if (strippedNumber.length === 10 || (strippedNumber.length === 11 && String(strippedNumber)[0] == 1)) {
+	var strippedNumber = stripFormatters(phoneNumber);
+
+	if (strippedNumber.length === 10 || (strippedNumber.length === 11 && strippedNumber[0] == 1)) {
 		if (isNumeric(strippedNumber)) {
 			return true;
 		} 
@@ -54,9 +54,8 @@ function isNumeric(phoneNumber) {
 	return /^[0-9]+$/.test(phoneNumber);
 }
 
-function stripPunctuation(phoneNumber) {
-	var strippedNumber = phoneNumber.replace(/[\s-().]/g,"");
-	return strippedNumber;
+function stripFormatters(phoneNumber) {
+	return phoneNumber.replace(/[\s-().]/g,"");
 }
 
 module.exports = PhoneNumber;
