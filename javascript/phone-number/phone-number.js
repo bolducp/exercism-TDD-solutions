@@ -1,32 +1,26 @@
 var PhoneNumber = function(phoneNumber) {
-	this.phoneNumber = String(phoneNumber);
+	this.phoneNumber = sanitize(phoneNumber);
 };
 
 PhoneNumber.prototype.number = function() {
-	if (isValid10DigitNumber(this.phoneNumber)) {
-		return stripFormatters(this.phoneNumber);
-	} else if (isValid11DigitNumber(this.phoneNumber)) {
-		return stripFormatters(this.phoneNumber).slice(1);
-	}
-	return "0000000000";
-}
+	return this.phoneNumber;
+};
 
 PhoneNumber.prototype.areaCode = function() {
-	if (isValid11DigitNumber(this.phoneNumber)) {
-		return this.phoneNumber.slice(1, 4);
-	} else if (isValid10DigitNumber(this.phoneNumber)) {
-		return this.phoneNumber.slice(0, 3);
-	}
-	return "000";
-}
+	return this.phoneNumber.slice(0, 3);
+};
 
 PhoneNumber.prototype.toString = function() {
-	if (isValid10DigitNumber(this.phoneNumber)) {
-		return "(" + this.areaCode() + ") " + this.number().slice(3, 6) + "-" + this.number().slice(6, 10);
-	} else if (isValid11DigitNumber(this.phoneNumber)) {
-		return "(" + this.areaCode() + ") " + this.number().slice(4, 7) + "-" + this.number().slice(7, 11);
+	return "(" + this.areaCode() + ") " + this.number().slice(3, 6) + "-" + this.number().slice(6, 10);
+};
+
+function sanitize(phoneNumber) {
+	if (isValid10DigitNumber(phoneNumber)) {
+		return stripFormatters(phoneNumber);
+	} else if (isValid11DigitNumber(phoneNumber)) {
+		return stripFormatters(phoneNumber).slice(1);
 	}
-	return "Invalid Number";
+	return "0000000000";
 }
 
 function isValid10DigitNumber(phoneNumber) { 
