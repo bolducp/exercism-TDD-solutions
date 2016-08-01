@@ -16,9 +16,9 @@ PhoneNumber.prototype.toString = function() {
 
 function sanitize(phoneNumber) {
     if (isValid10DigitNumber(phoneNumber)) {
-			return stripFormatters(phoneNumber);
+        return stripFormatters(phoneNumber);
     } else if (isValid11DigitNumber(phoneNumber)) {
-			return stripFormatters(phoneNumber).slice(1);
+        return stripFormatters(phoneNumber).slice(1);
     }
     return "0000000000";
 }
