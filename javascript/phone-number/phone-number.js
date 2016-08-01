@@ -1,9 +1,9 @@
 var PhoneNumber = function(phoneNumber) {
-this.phoneNumber = sanitize(phoneNumber);
+  this.phoneNumber = sanitize(phoneNumber);
 };
 
 PhoneNumber.prototype.number = function() {
-return this.phoneNumber;
+  return this.phoneNumber;
 };
 
 PhoneNumber.prototype.areaCode = function() {
