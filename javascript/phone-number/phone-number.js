@@ -23,12 +23,12 @@ function sanitize(phoneNumber) {
 	return "0000000000";
 }
 
-function isValid10DigitNumber(phoneNumber) { 
+function isValid10DigitNumber(phoneNumber) {
 	var strippedNumber = stripFormatters(phoneNumber);
 	return strippedNumber.length === 10 && isNumeric(strippedNumber);
 }
 
-function isValid11DigitNumber(phoneNumber) { 
+function isValid11DigitNumber(phoneNumber) {
 	var strippedNumber = stripFormatters(phoneNumber);
 	return strippedNumber.length === 11 && strippedNumber[0] == 1 && isNumeric(strippedNumber);
 }
