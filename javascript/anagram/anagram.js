@@ -6,16 +6,16 @@ Anagram.prototype.matches = function(possibleMatches) {
     if (!(possibleMatches instanceof Array)) {
         var possibleMatches = Array.prototype.slice.call(arguments);
     }
-    return possibleMatches.filter((possibleMatch) => isAnagram(this.word, possibleMatch));
+    return possibleMatches.filter((possibility) => isAnagram(this.word, possibility));
 };
 
 function isAnagram(firstWord, secondWord) {
     if (firstWord.toLowerCase() === secondWord.toLowerCase()) return false;
 
-    var firstSortedLetters = firstWord.toLowerCase().split("").sort().join("");
-    var secondSortedLetters = secondWord.toLowerCase().split("").sort().join("");
+    var firstWordSorted = firstWord.toLowerCase().split("").sort().join("");
+    var secondWordSorted = secondWord.toLowerCase().split("").sort().join("");
 
-    return firstSortedLetters === secondSortedLetters;
+    return firstWordSorted === secondWordSorted;
 }
 
 module.exports = Anagram;
