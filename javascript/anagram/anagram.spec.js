@@ -65,14 +65,14 @@ describe('Anagram', function() {
     expect(matches).toEqual([]);
   });
 
-  xit('matches() accepts string arguments',function() {
+  it('matches() accepts string arguments',function() {
     var subject = new Anagram('ant');
     var matches = subject.matches('stand', 'tan', 'at');
 
     expect(matches).toEqual(['tan']);
   });
 
-  xit('matches() accepts single string argument',function() {
+  it('matches() accepts single string argument',function() {
     var subject = new Anagram('ant');
     var matches = subject.matches('tan');
 
