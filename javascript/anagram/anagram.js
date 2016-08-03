@@ -3,19 +3,10 @@ var Anagram = function(word) {
 };
 
 Anagram.prototype.matches = function(possibleMatches) {
-    var matches = [];
-
     if (!(possibleMatches instanceof Array)) {
         var possibleMatches = Array.prototype.slice.call(arguments);
     }
-
-    for (var i = 0; i < possibleMatches.length; i++) {
-        if (isAnagram(this.word, possibleMatches[i])) {
-            matches.push(possibleMatches[i]);
-        }
-    }
-    
-    return matches;
+    return possibleMatches.filter((possibleMatch) => isAnagram(this.word, possibleMatch));
 };
 
 function isAnagram(firstWord, secondWord) {
