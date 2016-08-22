@@ -16,17 +16,18 @@ var Hamming = (function () {
     _createClass(Hamming, [{
         key: "compute",
         value: function compute(firstSequence, secondSequence) {
-            var differenceCount = 0;
-
             if (firstSequence.length !== secondSequence.length) {
                 throw new Error("DNA strands must be of equal length.");
             }
 
-            for (var i = 0; i < firstSequence.length; i++) {
-                if (firstSequence[i] !== secondSequence[i]) {
+            var differenceCount = 0;
+            var firstSequenceArray = firstSequence.split("");
+
+            firstSequenceArray.forEach(function (char, index) {
+                if (char !== secondSequence[index]) {
                     differenceCount += 1;
                 }
-            }
+            });
             return differenceCount;
         }
     }]);
