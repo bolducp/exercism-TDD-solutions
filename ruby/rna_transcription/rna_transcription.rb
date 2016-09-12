@@ -9,10 +9,8 @@ class Complement
       }
 
       sentence.each_char.map do |nucleotide|
-        !@complements.has_key?(nucleotide) ? (return "") : @complements[nucleotide]
-      end
-      .join("")
-
+        @complements.has_key?(nucleotide) ? @complements[nucleotide] : (return "") 
+      end.join
     end
   end
 end 
