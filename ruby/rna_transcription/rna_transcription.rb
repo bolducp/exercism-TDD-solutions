@@ -7,16 +7,14 @@ class Complement
         "T" => "A",
         "A" => "U"
       }
-      @transcribed_nucleotides = []
 
-      sentence.each_char do |nucleotide|
+      return sentence.each_char.map do |nucleotide|
         if !@complements.has_key?(nucleotide)
           return ""
         end
-        @transcribed_nucleotides << @complements[nucleotide]
+        @complements[nucleotide]
       end
-
-      @transcribed_nucleotides.join("")
+      .join("")
 
     end
   end
