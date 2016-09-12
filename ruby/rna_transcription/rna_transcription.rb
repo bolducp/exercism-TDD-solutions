@@ -8,11 +8,8 @@ class Complement
         "A" => "U"
       }
 
-      return sentence.each_char.map do |nucleotide|
-        if !@complements.has_key?(nucleotide)
-          return ""
-        end
-        @complements[nucleotide]
+      sentence.each_char.map do |nucleotide|
+        !@complements.has_key?(nucleotide) ? (return "") : @complements[nucleotide]
       end
       .join("")
 
