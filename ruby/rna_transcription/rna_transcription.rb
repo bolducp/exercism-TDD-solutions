@@ -9,7 +9,7 @@ class Complement
       }
       @transcribed_nucleotides = []
 
-      sentence.split("").each do |nucleotide|
+      sentence.each_char do |nucleotide|
         if !@complements.has_key?(nucleotide)
           return ""
         end
