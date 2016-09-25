@@ -11,15 +11,13 @@ class Squares
   end
 
   def sum_of_squares
-    squares = []
     sum = 0
-    @num_array.each { |num| squares << num**2 }
-    squares.each { |num| sum += num}
+    @num_array.each { |num| sum += num**2 }
     sum
   end
 
   def difference
-    self.square_of_sum - self.sum_of_squares
+    square_of_sum - sum_of_squares
   end
 end
 
