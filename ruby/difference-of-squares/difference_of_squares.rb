@@ -1,23 +1,18 @@
 class Squares
   def initialize(num)
-    @num = num
-    @num_array = (1..@num).to_a
+    @num_array = (0..num)
   end
 
-  def square_of_sum
-    sum = 0
-    @num_array.each { |num| sum += num}
-    sum**2
+  def square_of_sum()
+    @num_array.reduce(:+)**2
   end
 
-  def sum_of_squares
-    sum = 0
-    @num_array.each { |num| sum += num**2 }
-    sum
+  def sum_of_squares()
+    @num_array.reduce {|sum, n| sum + (n ** 2) }
   end
 
   def difference
-    square_of_sum - sum_of_squares
+    square_of_sum() - sum_of_squares()
   end
 end
 
