@@ -1,13 +1,8 @@
 class Pangram
-  @@alphabet = "abcdefghijklmnopqrstuvwxyz"
+  @@alphabet = ("a".."z")
 
   def self.is_pangram?(str)
-    @@alphabet.each_char do |char|
-      if !str.downcase.include? char
-        return false
-      end
-    end
-      return true
+    @@alphabet.all? { |letter| str.downcase.include? letter }
   end
 end
 
