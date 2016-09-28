@@ -19,7 +19,7 @@ module RomanNumerals
     numeral = ""
     number = self 
     
-    NUMBERS_TO_NUMERALS.each do |arabic_num, roman_num|
+    ARABIC_TO_ROMAN.each do |arabic_num, roman_num|
       while number >= arabic_num do
         numeral << roman_num
         number -= arabic_num
