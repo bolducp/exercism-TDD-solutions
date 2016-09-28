@@ -17,23 +17,15 @@ module RomanNumerals
 
   def to_roman
     numeral = ""
-    nums = get_num_pieces(self)
-
-    nums.reverse.each do |number|
-      NUMBERS_TO_NUMERALS.each do |num, value|
-        while number >= num do
-          numeral << value
-          number = number - num
-        end
+    number = self 
+    
+    NUMBERS_TO_NUMERALS.each do |num, value|
+      while number >= num do
+        numeral << value
+        number -= num
       end
     end
     numeral
-  end
-
-def get_num_pieces(num)
-    array = []
-    num.to_s.split('').reverse.each_with_index { |digit, index| array << digit.to_i * 10**index }
-    array
   end
 end
 
