@@ -1,5 +1,5 @@
 module RomanNumerals
-  NUMBERS_TO_NUMERALS = {
+  ARABIC_TO_ROMAN = {
     1000 => "M",
     900 => "CM",
     500 => "D",
@@ -19,10 +19,10 @@ module RomanNumerals
     numeral = ""
     number = self 
     
-    NUMBERS_TO_NUMERALS.each do |num, value|
-      while number >= num do
-        numeral << value
-        number -= num
+    NUMBERS_TO_NUMERALS.each do |arabic_num, roman_num|
+      while number >= arabic_num do
+        numeral << roman_num
+        number -= arabic_num
       end
     end
     numeral
