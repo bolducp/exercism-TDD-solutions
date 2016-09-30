@@ -1,31 +1,39 @@
-class Robot
-  attr_accessor :name
-  @@used_names = []
+require "set"
 
-  def initialize()
-    @name = make_unused_name()
+class Robot
+  attr_reader :name
+  @@used_names = Set.new
+
+  def initialize
+    set_name
+  end
+
+  def set_name
+    @name = get_unique_name
     @@used_names << @name
   end
+
+   def reset
+    @@used_names.delete(@name)
+    set_name
+  end
   
-  def make_unused_name()
+  def get_unique_name
     loop do
-      name_candidate = make_random_name()
-      if !@@used_names.include?(name_candidate)
-        return name_candidate
-      end
+      candidate = generate_random_name
+      return candidate unless @@used_names.include? candidate
     end
   end
 
-  def make_random_name()
+  def generate_random_name
     name = []
-    name << (1..2).map { (65 + rand(26)).chr }
-    name << (1..3).map { rand(9)}
+    name << ("A".."Z").to_a.sample(2)
+    name << (0..9).to_a.sample(3)
     name.join
   end
 
-  def reset()
-    initialize()
-  end
+  private :get_unique_name, :generate_random_name
+
 end
 
 module BookKeeping
