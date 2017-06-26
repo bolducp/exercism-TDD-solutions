@@ -3,28 +3,24 @@ def hey(input) do
     cond do
         question?(input) -> "Sure."
         empty?(input) -> "Fine. Be that way!"
-        invalid_speech(input) -> "Whatever."
         shouting?(input) -> "Whoa, chill out!"
         true -> "Whatever."
     end
   end
 
-  def invalid_speech(input) do
-    !(input =~ ~r/[[:alpha:]]/)
-  end
-
   def empty?(input) do
-    input
-    |> String.strip == ""
+    String.strip(input) == ""
   end
 
   def shouting?(input) do
-    input
-    |> String.upcase == input
+    String.upcase(input) == input && valid_speech(input)
   end
 
   def question?(input) do
-    input
-    |> String.last == "?"
+    String.last(input) == "?"
+  end
+
+  def valid_speech(input) do
+    input =~ ~r/[[:alpha:]]/
   end
 end
