@@ -8,19 +8,11 @@ def hey(input) do
     end
   end
 
-  def empty?(input) do
-    String.strip(input) == ""
-  end
+  def empty?(input), do: String.strip(input) == ""
 
-  def shouting?(input) do
-    String.upcase(input) == input && valid_speech(input)
-  end
+  def shouting?(input), do: String.upcase(input) == input && valid_speech(input)
 
-  def question?(input) do
-    String.last(input) == "?"
-  end
+  def question?(input), do: String.last(input) == "?"
 
-  def valid_speech(input) do
-    input =~ ~r/[[:alpha:]]/
-  end
+  def valid_speech(input), do: input =~ ~r/[[:alpha:]]/
 end
