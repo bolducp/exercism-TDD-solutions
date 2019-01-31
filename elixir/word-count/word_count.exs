@@ -6,22 +6,13 @@ defmodule Words do
   @spec count(String.t) :: map
   def count(sentence) do
     sentence
-    |> String.downcase
-    |> String.replace([",", ":", "@", "&", "^", "%", "!", "?", "$"], "")
-    |> String.split(["_", " "], trim: true)
-    |> Enum.map(&String.trim/1)
-    |> hist
+    |> String.downcase()
+    |> String.split([",", ":", "@", "&", "^", "%", "!", "?", "$", "_", " "], trim: true)
+    |> make_hist()
   end
 
-  def hist(word_list) do
-    hist(word_list, %{})
-  end
-
-  def hist(word_list, map) do
-    if length(word_list) == 0 do
-      map
-    else
-      hist(tl(word_list), Map.update(map, hd(word_list), 1, &(&1 + 1)))
-    end
+  def make_hist(word_list) do
+    word_list
+    |> Enum.reduce(%{}, fn (word, acc) -> Map.update(acc, word, 1, &(&1 + 1)) end)
   end
 end
