@@ -1,10 +1,11 @@
-import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
 
 class Twofer {
     String twofer(String name) {
-      if (name == "" || name == null) {
-        return "One for you, one for me.";
-      }
-      return String.format("One for %s, one for me.", name);
+      Optional<String> optionalName = Optional.ofNullable(name);
+      String parsedName = optionalName.orElse("you");
+
+      return String.format("One for %s, one for me.", parsedName == "" ? "you" : parsedName);
     }
 }
