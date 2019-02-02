@@ -1,11 +1,9 @@
-import java.util.Objects;
 import java.util.Optional;
 
 class Twofer {
-    String twofer(String name) {
-      Optional<String> optionalName = Optional.ofNullable(name);
-      String parsedName = optionalName.orElse("you");
+    private static final String message = "One for %s, one for me.";
 
-      return String.format("One for %s, one for me.", parsedName == "" ? "you" : parsedName);
+    String twofer(String name) {
+        return String.format(message, Optional.ofNullable(name).filter(str -> !str.equals("")).orElse("you"));
     }
 }
