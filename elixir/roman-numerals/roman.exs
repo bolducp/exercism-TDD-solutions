@@ -1,29 +1,38 @@
 defmodule Roman do
+  @decimal_to_roman %{
+    1 => "I",
+    5 => "V",
+    10 => "X",
+    50 => "L",
+    100 => "C",
+    500 => "D",
+    1000 => "M"
+  }
+
   @doc """
   Convert the number to a roman number.
   """
-
   @spec numerals(pos_integer) :: String.t()
   def numerals(number) do
     thousands =
       number
       |> get_interval_digit(-4)
-      |> handle_1000s()
+      |> convert(@decimal_to_roman[1000])
 
     hundreds =
       number
       |> get_interval_digit(-3)
-      |> handle_100s()
+      |> convert(@decimal_to_roman[100], @decimal_to_roman[500], @decimal_to_roman[1000])
 
     tens =
       number
       |> get_interval_digit(-2)
-      |> handle_10s()
+      |> convert(@decimal_to_roman[10], @decimal_to_roman[50], @decimal_to_roman[100])
 
     ones =
       number
       |> get_interval_digit(-1)
-      |> handle_1s()
+      |> convert(@decimal_to_roman[1], @decimal_to_roman[5], @decimal_to_roman[10])
 
     thousands <> hundreds <> tens <> ones
   end
@@ -38,59 +47,28 @@ defmodule Roman do
     end
   end
 
-  def handle_1000s(number) do
-    number
-    |> case do
-      0 -> ""
-      total -> String.duplicate("M", total)
+  def convert(digit, one_value, five_value, ten_value) do
+    cond do
+      digit == 0 ->
+        ""
+      digit > 0 and digit < 4 ->
+        String.duplicate(one_value, digit)
+      digit == 4 ->
+        one_value <> five_value
+      digit == 5 ->
+        five_value
+      digit > 5 and digit < 9 ->
+        five_value <> String.duplicate(one_value, digit - 5)
+      digit == 9 ->
+        one_value <> ten_value
     end
   end
 
-  def handle_100s(number) do
-    number
-    |> case do
-      0 -> ""
-      1 -> "C"
-      2 -> "CC"
-      3 -> "CCC"
-      4 -> "CD"
-      5 -> "D"
-      6 -> "DC"
-      7 -> "DCC"
-      8 -> "DCCC"
-      9 -> "CM"
-    end
-  end
-
-  def handle_10s(number) do
-    number
-    |> case do
-      0 -> ""
-      1 -> "X"
-      2 -> "XX"
-      3 -> "XXX"
-      4 -> "XL"
-      5 -> "L"
-      6 -> "LX"
-      7 -> "LXX"
-      8 -> "LXXX"
-      9 -> "XC"
-    end
-  end
-
-  def handle_1s(number) do
-    number
-    |> case do
-      0 -> ""
-      1 -> "I"
-      2 -> "II"
-      3 -> "III"
-      4 -> "IV"
-      5 -> "V"
-      6 -> "VI"
-      7 -> "VII"
-      8 -> "VIII"
-      9 -> "IX"
+  def convert(digit, one_value) do
+    if digit == 0 do
+      ""
+    else
+      String.duplicate(one_value, digit)
     end
   end
 end
