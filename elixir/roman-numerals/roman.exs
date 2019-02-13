@@ -1,5 +1,5 @@
 defmodule Roman do
-  @roman_decimal [
+  @roman_decimal_conversions [
     {"M",  1000},
     {"CM", 900},
     {"D",  500},
@@ -18,7 +18,7 @@ defmodule Roman do
   def numerals(0), do: ""
 
   def numerals(number) do
-    {roman, decimal} = Enum.find(@roman_decimal, fn {roman, decimal} ->
+    {roman, decimal} = Enum.find(@roman_decimal_conversions, fn {roman, decimal} ->
       number >= decimal
     end)
 
