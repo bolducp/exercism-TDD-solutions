@@ -3,7 +3,10 @@ import re
 class Phone(object):
     def __init__(self, phone_number):
         self.number = self.parse_number_string(phone_number)
+        self.area_code = self.number[0:3]
 
+    def pretty(self):
+        return f'({self.area_code}) {self.number[3:6]}-{self.number[6:]}'
 
     def parse_number_string(self, phone_number):
         self.check_correct_number_of_digits(phone_number)
