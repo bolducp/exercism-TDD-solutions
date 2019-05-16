@@ -17,7 +17,7 @@ def find_palindrome(max_factor, min_factor, find_largest=True):
                     factors[pair_product].append((low, high))
                 else:
                     factors[pair_product] = [(low, high)]
-    # print("  ")
+
     if not factors.keys():
         return (None, [])
 
