@@ -9,9 +9,6 @@ def is_scalene(sides):
 
 def check_is_triange(sides):
     sorted_sides = sorted(sides)
-
-    if 0 in sides:
-        return False
-    elif sorted_sides[2] > (sorted_sides[0] + sorted_sides[1]):
+    if 0 in sides or sorted_sides[2] > (sorted_sides[0] + sorted_sides[1]):
         return False
     return True
